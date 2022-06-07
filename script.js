@@ -5,27 +5,6 @@ const createProductImageElement = (imageSource) => {
   return img;
 };
 
-const createCustomElement = (element, className, innerText) => {
-  const e = document.createElement(element);
-  e.className = className;
-  e.innerText = innerText;
-  return e;
-};
-
-const createProductItemElement = ({ sku, name, image }) => {
-  const section = document.createElement('section');
-  section.className = 'item';
-
-  section.appendChild(createCustomElement('span', 'item__sku', sku));
-  section.appendChild(createCustomElement('span', 'item__title', name));
-  section.appendChild(createProductImageElement(image));
-  section.appendChild(createCustomElement('button', 'item__add', 'Adicionar ao carrinho!'));
-
-  return section;
-};
-
-const getSkuFromProductItem = (item) => item.querySelector('span.item__sku').innerText;
-
 const cartItemClickListener = (event) => {
   // coloque seu código aqui
 };
@@ -38,8 +17,46 @@ const createCartItemElement = ({ sku, name, salePrice }) => {
   return li;
 };
 
+const list = document.querySelector('.cart__items');
+
+const createCartListProducts = async (item) => {
+  const products = await fetchItem(item);
+  const { id, title, price } = products;
+  const product = {
+    sku: id,
+    name: title,
+    salePrice: price,
+  };
+  list.appendChild(createCartItemElement(product));
+};
+
+const createCustomElement = (element, className, innerText, sku) => {
+  const e = document.createElement(element);
+  e.className = className;
+  e.innerText = innerText;
+  if (element === 'button') {
+    e.addEventListener('click', () => {
+      createCartListProducts(sku);
+    });
+  }
+  return e;
+};
+
+const createProductItemElement = ({ sku, name, image }) => {
+  const section = document.createElement('section');
+  section.className = 'item';
+
+  section.appendChild(createCustomElement('span', 'item__sku', sku));
+  section.appendChild(createCustomElement('span', 'item__title', name));
+  section.appendChild(createProductImageElement(image));
+  section.appendChild(createCustomElement('button', 'item__add', 'Adicionar ao carrinho!', sku));
+
+  return section;
+};
+
+const getSkuFromProductItem = (item) => item.querySelector('span.item__sku').innerText;
+
 const items = document.querySelector('.items');
-console.log(items);
 
 const createListProducts = async () => {
   const products = await fetchProducts('computador');
