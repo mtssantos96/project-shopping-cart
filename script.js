@@ -15,7 +15,7 @@ const getSum = () => {
   li.forEach((element) => {
     result += parseFloat(element.innerHTML.split('$')[1]);
   });
-  totalPrice.innerText = result;
+  totalPrice.innerText = Math.round(result * 100) / 100;
 };
 
 const cartItemClickListener = (event) => {
@@ -29,7 +29,6 @@ const createCartItemElement = ({ sku, name, salePrice }) => {
   li.className = 'cart__item';
   li.innerText = `SKU: ${sku} | NAME: ${name} | PRICE: $${salePrice}`;
   li.addEventListener('click', cartItemClickListener);
-  getSum();
   return li;
 };
 
@@ -43,6 +42,7 @@ const createCartListProducts = async (item) => {
   };
   list.appendChild(createCartItemElement(product));
   saveCartItems(list.innerHTML);
+  getSum();
 };
 
 const createCustomElement = (element, className, innerText, sku) => {
