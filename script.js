@@ -5,8 +5,10 @@ const createProductImageElement = (imageSource) => {
   return img;
 };
 
+const list = document.querySelector('.cart__items');
+
 const cartItemClickListener = (event) => {
-  // coloque seu código aqui
+  event.target.remove();
 };
 
 const createCartItemElement = ({ sku, name, salePrice }) => {
@@ -16,8 +18,6 @@ const createCartItemElement = ({ sku, name, salePrice }) => {
   li.addEventListener('click', cartItemClickListener);
   return li;
 };
-
-const list = document.querySelector('.cart__items');
 
 const createCartListProducts = async (item) => {
   const products = await fetchItem(item);
