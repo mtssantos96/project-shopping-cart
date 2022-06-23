@@ -71,11 +71,19 @@ const createProductItemElement = ({ sku, name, image }) => {
 
 const items = document.querySelector('.items');
 
-const createListProducts = async () => {
+const createLoading = () => {
   const load = createCustomElement('p', 'loading', 'Carregando...');
-  items.appendChild(load);
-  const products = await fetchProducts('computador');
+  return items.appendChild(load);
+};
+
+const removeLoanding = () => {
   document.querySelector('.loading').remove();
+};
+
+const createListProducts = async () => {
+  createLoading();
+  const products = await fetchProducts('computador');
+  removeLoanding();
   products.forEach(({ id, title, thumbnail }) => {
     const product = {
       sku: id,
