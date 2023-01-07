@@ -15,7 +15,7 @@ const getSum = () => {
   li.forEach((element) => {
     result += parseFloat(element.innerHTML.split('$')[1]);
   });
-  totalPrice.innerText = Math.round(result * 100) / 100;
+  totalPrice.innerText = `R$ ${Math.round(result * 100) / 100}`;
 };
 
 const cartItemClickListener = (event) => {
@@ -61,9 +61,9 @@ const createProductItemElement = ({ sku, name, image }) => {
   const section = document.createElement('section');
   section.className = 'item';
 
+  section.appendChild(createProductImageElement(image));
   section.appendChild(createCustomElement('span', 'item__sku', sku));
   section.appendChild(createCustomElement('span', 'item__title', name));
-  section.appendChild(createProductImageElement(image));
   section.appendChild(createCustomElement('button', 'item__add', 'Adicionar ao carrinho!', sku));
 
   return section;
@@ -106,7 +106,7 @@ const clearCart = () => {
   clear.addEventListener('click', () => {
     localStorage.clear();
     list.innerText = '';
-    totalPrice.innerText = 0;
+    totalPrice.innerText = `R$ ${0}`;
   });
 };
 
