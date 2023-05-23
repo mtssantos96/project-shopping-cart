@@ -33,7 +33,7 @@ body {
   display: flex;
   align-items: center;
   background-color: rgb(10, 118, 79);
-  width: 40%;
+  width: 39%;
   height: 100%;
   margin-left: 30px;
 }
@@ -139,7 +139,6 @@ body {
 .item .item__add {
   background-color: rgb(5, 52, 219);
   border: 0;
-  border-radius: 5px;
   width: 100%;
   cursor: pointer;
   margin: 0;
@@ -161,7 +160,27 @@ body {
   flex-basis: 32%;
   flex-flow: column wrap;
   background-color: rgb(241, 241, 241);
-  min-height: max-content;
+  width: 40%;
+}
+
+@media screen and ( max-width : 1080px ) {
+
+  .cart .cart__items {
+    padding: 4px;
+  }
+
+  .cart__item {
+    flex-direction: column;
+    margin: 4px;
+    padding: 2px;
+    font-size: 12px;
+  }
+
+  .productContent {
+    height: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 }
 
 .cart .cart__items {
@@ -173,19 +192,59 @@ body {
 }
 
 .cart__item {
+  align-items: center;
   background-color: white;
+  display: flex;
+  justify-content: center;
   margin: 4px;
-  cursor: pointer;
   padding: 10px;
   border-radius: 5px;
+  width: 100%;
 }
 
-.cart__item:hover {
-  box-shadow: 1px 10px 10px 4px rgba(0, 0, 0, 0.1);
-  transition: -webkit-box-shadow 0.1s ease-in-out, border 0.1s ease-in-out;
+.cart__item img {
+  border-radius: 10px;
+}
+
+.productContent {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.productContent p {
+  justify-content: flex-start;
+  overflow: hidden;
+  padding: 10px;
+  max-width: 80%;
+  text-overflow: ellipsis;
+  word-break: break-word;
+}
+
+.cart__item button {
+  background-color: rgb(219, 219, 219);
+  border: 1px solid rgb(149, 149, 149);
+  border-radius: 5px;
+  color: rgb(149, 149, 149);
+  cursor: pointer;
+  font-weight: 800;
+  padding: 5px 8px;
+}
+
+.productPrice {
+  color: rgb(10, 118, 79);
+  font-weight: 600;
+}
+
+.cart__item button:hover {
   background-color: rgb(223, 44, 44);
   font-weight: 600;
   color: white;
+  transition: 150ms ease-in-out;
 }
 
 .empty-cart {

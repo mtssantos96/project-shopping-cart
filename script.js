@@ -19,23 +19,39 @@ const getSum = () => {
 };
 
 const cartItemClickListener = (event) => {
-  event.target.remove();
+  const id = event.target.className;
+  const selector = `.cart__item .${id}`;
+  const element = document.querySelector(selector);
+  element.parentNode.remove();
   saveCartItems(list.innerHTML);
   getSum();
 };
 
-const createCartItemElement = ({ sku, name, salePrice }) => {
+const createCustomProductElement = (element, className, innerText) => {
+  const e = document.createElement(element);
+  e.className = className;
+  if (className !== 'productContent') e.innerText = innerText;
+  return e;
+};
+
+const createCartItemElement = ({ image, sku, name, salePrice }) => {
   const li = document.createElement('li');
   li.className = 'cart__item';
-  li.innerText = `SKU: ${sku} | NAME: ${name} | PRICE: $${salePrice}`;
-  li.addEventListener('click', cartItemClickListener);
+  li.appendChild(createProductImageElement(image));
+  const textContainer = li.appendChild(createCustomProductElement('div', 'productContent'));
+  textContainer.appendChild(createCustomProductElement('p', 'productName', name));
+  const price = `R$ ${salePrice}`;
+  textContainer.appendChild(createCustomProductElement('p', 'productPrice', price));
+  const button = li.appendChild(createCustomProductElement('button', sku, 'X'));
+  button.addEventListener('click', cartItemClickListener);
   return li;
 };
 
 const createCartListProducts = async (item) => {
   const products = await fetchItem(item);
-  const { id, title, price } = products;
+  const { id, title, price, thumbnail } = products;
   const product = {
+    image: thumbnail,
     sku: id,
     name: title,
     salePrice: price,
