@@ -187,7 +187,7 @@ body {
   align-items: center;
   background-color: white;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   margin: 4px;
   padding: 10px;
   border-radius: 5px;
