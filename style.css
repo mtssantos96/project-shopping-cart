@@ -19,8 +19,11 @@ body {
 }
 
 .header i {
-  font-size: 45px;
-  color: white;
+  background-color: rgb(10, 118, 79);
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 30px;
+  padding: 6px;
 }
 
 .container-title {
@@ -168,6 +171,10 @@ body {
   width: 40%;
 }
 
+.cart.hidden {
+  display: none;
+}
+
 .cart .cart__items {
   padding: 10px;
   display: flex;
@@ -282,11 +289,6 @@ body {
 
 @media screen and ( max-width : 500px ) {
 
-  .cart {
-    display: none;
-    transition: 0.2s ease-in-out;
-  }
-
   .cart__title {
     display: none;
   }
@@ -296,11 +298,16 @@ body {
   }
 
   .container-title {
-    width: 100%;
+    max-width: 80%;
+    min-width: 20%;
     text-align: center;
   }
 
   .header i {
-    display: none;
+    background-color: rgb(10, 118, 79);
+    border-radius: 5px;
+    font-size: 30px;
+    padding: 6px;
+    margin-right: 20px;
   }
 }

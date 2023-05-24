@@ -110,6 +110,13 @@ const createListProducts = async () => {
   });
 };
 
+const cartToggle = document.querySelector('.cart-toggle');
+const cartElement = document.querySelector('.cart');
+
+cartToggle.addEventListener('click', () => {
+  cartElement.classList.toggle('hidden');
+});
+
 const savedItems = () => {
   list.innerHTML = getSavedCartItems();
   document.querySelectorAll('.cart__item').forEach((item) => item
