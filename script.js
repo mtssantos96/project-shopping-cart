@@ -9,23 +9,6 @@ const totalPrice = document.querySelector('.total-price');
 
 const list = document.querySelector('.cart__items');
 
-const formatPrice = (price) => {
-  let newPrice = String(price);
-
-  if (newPrice.includes('.')) {
-    const decimalPart = newPrice.split('.')[1];
-    if (decimalPart.length === 1) {
-      newPrice += '0';
-    }
-  } else if (!newPrice.includes(',')) {
-    newPrice += ',00';
-  }
-
-  newPrice = parseFloat(newPrice.replace(',', '.'))
-    .toFixed(2).replace('.', ',');
-  return `R$ ${newPrice}`;
-};
-
 const getSum = () => {
   const li = document.querySelectorAll('.cart__item');
   let result = 0;
@@ -109,47 +92,27 @@ const items = document.querySelector('.items');
 
 const createLoading = () => {
   const load = createCustomElement('p', 'loading', 'Carregando...');
-  return items.appendChild(load);
+  items.appendChild(load);
+  return load;
 };
 
-const removeLoanding = () => {
-  document.querySelector('.loading').remove();
-};
-
-const createCartLoading = () => {
-  const load = createCustomElement('p', 'loadingCart', 'Carregando...');
-  return list.appendChild(load);
-};
-
-const removeCartLoanding = () => {
-  document.querySelector('.loadingCart').remove();
+const removeLoanding = (loadingElements) => {
+  loadingElements.forEach((loadingElement) => {
+    loadingElement.remove();
+  });
 };
 
 const createListProducts = async () => {
-  createLoading();
-  createLoading();
-  createLoading();
-  createLoading();
-  createLoading();
-  createLoading();
-  createLoading();
-  createLoading();
+  const loadingElements = [];
+  for (let i = 0; i < 8; i) {
+    const loadingElement = createLoading();
+    i += 1;
+    loadingElements.push(loadingElement);
+  }
   const products = await fetchProducts('computador');
-  removeLoanding();
-  removeLoanding();
-  removeLoanding();
-  removeLoanding();
-  removeLoanding();
-  removeLoanding();
-  removeLoanding();
-  removeLoanding();
-  products.forEach(({ id, title, thumbnail, price }) => {
-    const product = {
-      sku: id,
-      name: title,
-      image: thumbnail,
-      price,
-    };
+  removeLoanding(loadingElements);
+  products.results.forEach(({ id, title, thumbnail, price }) => {
+    const product = { sku: id, name: title, image: thumbnail, price };
     items.appendChild(createProductItemElement(product));
   });
 };
@@ -161,10 +124,9 @@ const savedItems = () => {
 };
 
 const cartContainer = document.querySelector('.cart');
-const cartTitleContainer = document.querySelector('.container-cartTitle');
 const cartIcon = document.querySelector('.header i');
 
-function toggleCartVisibility() {
+const toggleCartVisibility = () => {
   cartContainer.classList.toggle('noVisible');
   cartContainer.classList.toggle('visible');
   if (cartContainer.classList.contains('visible')) {
@@ -176,7 +138,11 @@ function toggleCartVisibility() {
     cartIcon.classList.add('shopping-cart-icon');
     cartIcon.classList.remove('highlight-off-icon');
   }
-}
+};
+
+const iconEventListener = () => {
+  cartIcon.addEventListener('click', toggleCartVisibility);
+};
 
 const clear = document.querySelector('.empty-cart');
 
@@ -193,4 +159,5 @@ window.onload = () => {
   savedItems();
   clearCart();
   getSum();
+  iconEventListener();
 };
