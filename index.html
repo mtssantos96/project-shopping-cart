@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Shopping Cart</title>
-    <link rel="icon" href="./favicon.ico" />
+    <link rel="icon" href="./assets/favicon.ico" />
     <link rel="stylesheet" href="style.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="./helpers/fetchItem.js" defer></script>
     <script src="./helpers/fetchProducts.js" defer></script>
@@ -21,15 +21,15 @@
     <header class="header">
       <div class="container-title">
         <span class="title"><strong>trybe</strong>shopping</span>
+        <i class="material-icons highlight-off-icon" onclick="toggleCartVisibility()">highlight_off</i>
       </div>
-      <i class="material-icons cart-toggle">shopping_cart</i>
       <div class="container-cartTitle">
         <span class="cart__title">Meu carrinho</span>
       </div>
     </header>
     <section class="container">
       <section class="items"></section>
-      <section class="cart">
+      <section class="cart visible">
         <h3 class="total-text">Total do Carrinho: </h3>
         <h3 class="total-price">R$ 0</h3>
         <button class="empty-cart">Esvaziar carrinho</button>

@@ -1,6 +1,8 @@
 # Projeto Shopping Cart - Carrinho de Compras Dinâmico
 
-![Shopping Cart](link_para_imagem)
+![Shopping Cart](./assets//projectImages/projetoShoppingCart.png)
+
+![Shopping Cart](./assets//projectImages/projetoShoppingCart.gif)
 
 ## Descrição do Projeto
 
