@@ -11,8 +11,6 @@ const clear = document.querySelector('.empty-cart');
 const totalPrice = document.querySelector('.total-price');
 // Lista dos produtos do Carrinho.
 const list = document.querySelector('.cart__items');
-// Cada produto do Carrinho.
-const cartItem = document.querySelectorAll('.cart__item');
 // --------------------------------------------------- //
 
 // Criar um elemento HTML de imagem.
@@ -25,6 +23,8 @@ const createProductImageElement = (imageSource) => {
 
 // Realiza a soma do valor total do carrinho.
 const getSum = () => {
+// Cada produto do Carrinho.
+  const cartItem = document.querySelectorAll('.cart__item');
   let result = 0;
   cartItem.forEach((element) => {
     const priceText = element.innerHTML.split('$')[1].replace(',', '.');
@@ -168,7 +168,7 @@ const clearCart = () => {
         list.removeChild(list.firstChild);
       } 
     }
-      getSum();
+    getSum();
   });
 };
 
