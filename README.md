@@ -6,26 +6,26 @@
 ## Descrição do Projeto
 
 Projeto desenvolvido durante meu aprendizado no curso de Desenvolvimento Web da [Trybe](https://www.betrybe.com/) (Módulo: Front-end). <br>
-Nesse projeto coloco em prática o que aprendi sobre JavaScript assíncrono, Fetch API, Async/Await, Jest - Testes Assíncronos.
+Nesse projeto coloco em prática o que aprendi sobre JavaScript assíncrono, Fetch API, Async/Await, Jest — Testes Assíncronos.
 
-O projeto Shopping Cart é uma aplicação que visa criar um carrinho de compras totalmente dinâmico, consumindo dados diretamente da API do Mercado Livre. Nesse projeto fazemos a busca pela categorias "computadores" e exibimos o resultado, mostrando imagem, nome e valor de cada produto.
+O projeto Shopping Cart é uma aplicação que visa criar um carrinho de compras totalmente dinâmico, consumindo dados diretamente da API do Mercado Livre. Nesse projeto fazemos a busca pela categoria "computadores" e exibimos o resultado, mostrando imagem, nome e valor de cada produto.
 
 ## Funcionalidades
 
 O projeto oferece as seguintes funcionalidades:
 
-- Visualização dos produtos disponíveis no Mercado Livre (Computadores).
+- Visualização dos produtos disponíveis no Mercado Livre (Categoria Computadores).
 - Adição de produtos ao carrinho de compras.
 - Remoção de produtos do carrinho de compras.
-- Atualização automática dos preços e estoques dos produtos por meio da API.
+- Atualização automática do valor total dos produtos no carrinho.
 
 ## Desenvolvimento
 
-O projeto foi elaborado com base no Desenvolvimento Orientado a Testes (Test Driven Development - TDD), ou seja, realizamos testes antes de implementar as funções da aplicação, de forma a assegurar a eficiência da função e prever possíveis falhas.
+O projeto foi elaborado com base no Desenvolvimento Orientado a Testes (Test Driven Development — TDD), ou seja, realizamos testes antes de implementar as funções da aplicação, para assegurar a eficiência da função e prever possíveis falhas.
 
 ## Objetivos do projeto
 
-### 1 - Desenvolver testes para cobrir 100% da função fetchProducts:
+### 1 - Desenvolver testes para cobrir 100% da função `fetchProducts`:
 
 É testado se:
   
@@ -42,7 +42,7 @@ O projeto foi elaborado com base no Desenvolvimento Orientado a Testes (Test Dri
 - É criado a função `createListProducts`, responsável por criar a lista de produtos;
 - Utilizo a função `createProductItemElement()`(função já criada) para criar os componentes HTML referentes a um produto;
 
-### 3 - Desenvolver testes para cobrir 100% da função fetchItem:
+### 3 - Desenvolver testes para cobrir 100% da função `fetchItem`:
 
 É testado se:
 
@@ -59,13 +59,42 @@ O projeto foi elaborado com base no Desenvolvimento Orientado a Testes (Test Dri
 - É criado a função `createCartListProducts`, responsável por adicionar o produto no carrinho;
 - Utilizo a função `createCartItemElement()`(função já criada) para criar os componentes HTML referentes um item do carrinho;
 
-5 - Remover o item do carrinho de compras ao clicar nele;<br>
-6 - Desenvolver testes para cobrir 100% da função saveCartItems;<br>
-7 - Desenvolver testes para cobrir 100% da função getSavedCartItems;<br>
-8 - Carreguar o carrinho de compras através do **LocalStorage** ao iniciar a página;<br>
-9 - Calcular o valor total dos itens do carrinho de compras de forma assíncrona;<br>
-10 - Implementar a lógica no botão `Esvaziar Carrinho` para limpar o carrinho de compras;<br>
-11 - Adicionar um texto de `carregando` durante uma requisição à API.<br>
+### 5 - Remover o item do carrinho de compras ao clicar nele:
+
+- Implementação da função `cartItemClickListener`, responsável por adicionar um evento de clique no produto do carrinho para removê-lo;
+
+### 6 - Desenvolver testes para cobrir 100% da função `saveCartItems`:
+
+É testado se:
+
+- ao executar a função `saveCartItems` com o argumento `<ol><li>Item</li></ol>`, o método `localStorage.setItem` foi chamado;
+- ao executar a função `saveCartItems` com o argumento `<ol><li>Item</li></ol>`, o método `localStorage.setItem` é chamado com dois parâmetros, sendo o primeiro `cartItems` e o segundo sendo o valor passado como argumento para `saveCartItems`;
+
+### 7 - Desenvolver testes para cobrir 100% da função `getSavedCartItems`:
+
+É testado se:
+
+- Ao executar a função `getSavedCartItems`, o método `localStorage.getItem` é chamado;
+- ao executar a função `getSavedCartItems`, o método `localStorage.getItem` é chamado com o `cartItems` como parâmetro.
+
+### 8 - Carregar o carrinho de compras através do `LocalStorage` ao iniciar a página:
+
+- Implementação da função `saveCartItems`, responsável por adicionar o item no `localStorage` em uma chave chamada `cartItems`;
+- Implementação da função `getSavedCartItems` responsável por retornar o item do `localStorage`.
+
+### 9 - Calcular o valor total dos itens do carrinho de compras de forma assíncrona:
+
+- Implementação da função `getSum` responsável por fazer a soma de todos os produtos que estão no carrinho.
+
+### 10 - Implementar a lógica no botão `Esvaziar Carrinho` para limpar o carrinho de compras:
+
+- Implementação da função `clearCart` responsável por remover todos os produtos que estão no carrinho.
+
+### 11 - Adicionar um texto de `carregando` durante uma requisição à API:
+
+- Implementação da função `createLoading` responsável criar o elemento que contem o texto `carregando`;
+- Implementação da função `removeLoanding` responsável remover o elemento criado por `createLoading`;
+- É implementado a lógica necessária para aparecer o elemento criado antes da função `createListProducts` fazer a requisição a API e logo após faz a remoção do elemento.
 
 ## Tecnologias Utilizadas
 
@@ -103,7 +132,3 @@ cd project-shopping-cart
 ## Contribuição
 
 Se você quiser contribuir para o desenvolvimento deste projeto, sinta-se à vontade para fazer um fork do repositório e enviar suas sugestões por meio de pull requests. Todas as contribuições são bem-vindas!
-
-## Autor
-
-O projeto Shopping Cart foi desenvolvido por [Matheus Santos](https://github.com/mtssantos96).
