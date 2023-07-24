@@ -143,4 +143,4 @@ Esse era o projeto quando eu concluí os requisitos pedidos pelo curso:
 
 E como é possível ver na sessão `Demostração do funcionamento do projeto` essa é a cara atual dele, implementei novas funcionalidades e fiz melhorias no código. Também fiz melhorias na parte estética, seguindo como padrão a paleta de cores do protótipo do projeto. Ainda planejo adicionar outras funções.
 
-#Obrigado pela visita :blue_heart:
+# Obrigado pela visita :blue_heart:
