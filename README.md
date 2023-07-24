@@ -136,9 +136,11 @@ Se você quiser contribuir para o desenvolvimento deste projeto, sinta-se à von
 ## Nota
 
 Esse é o protótipo do esperado do projeto (protótipo criado pela [Trybe](https://www.betrybe.com/)):
+
 ![protótipo](./assets//projectImages/prototipo.gif)
 
 Esse era o projeto quando eu concluí os requisitos pedidos pelo curso:
+
 ![projetoCurso](./assets//projectImages/projetoCurso.png)
 
 E como é possível ver na sessão `Demostração do funcionamento do projeto` essa é a cara atual dele, implementei novas funcionalidades e fiz melhorias no código. Também fiz melhorias na parte estética, seguindo como padrão a paleta de cores do protótipo do projeto. Ainda planejo adicionar outras funções.
