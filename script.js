@@ -1,3 +1,21 @@
+// Elementos HTML
+// Container da lista de produtos.
+const items = document.querySelector('.items');
+// Icone do Carrinho de compras.
+const cartIcon = document.querySelector('.header i');
+// Container do Carrinho.
+const cartContainer = document.querySelector('.cart');
+// Botão de limpar o carrinho.
+const clear = document.querySelector('.empty-cart');
+// Elemento HTML que contem o valor total do carrinho.
+const totalPrice = document.querySelector('.total-price');
+// Lista dos produtos do Carrinho.
+const list = document.querySelector('.cart__items');
+// Cada produto do Carrinho.
+const cartItem = document.querySelectorAll('.cart__item');
+// --------------------------------------------------- //
+
+// Criar um elemento HTML de imagem.
 const createProductImageElement = (imageSource) => {
   const img = document.createElement('img');
   img.className = 'item__image';
@@ -5,14 +23,10 @@ const createProductImageElement = (imageSource) => {
   return img;
 };
 
-const totalPrice = document.querySelector('.total-price');
-
-const list = document.querySelector('.cart__items');
-
+// Realiza a soma do valor total do carrinho.
 const getSum = () => {
-  const li = document.querySelectorAll('.cart__item');
   let result = 0;
-  li.forEach((element) => {
+  cartItem.forEach((element) => {
     const priceText = element.innerHTML.split('$')[1].replace(',', '.');
     const priceValue = parseFloat(priceText);
     result += priceValue;
@@ -20,6 +34,7 @@ const getSum = () => {
   totalPrice.innerText = formatPrice(result);
 };
 
+// Remove um item específico do carrinho de compras quando o botão de remoção é clicado. 
 const cartItemClickListener = (event) => {
   const id = event.target.className;
   const selector = `.cart__item .${id}`;
@@ -29,13 +44,15 @@ const cartItemClickListener = (event) => {
   getSum();
 };
 
-const createCustomProductElement = (element, className, innerText) => {
-  const e = document.createElement(element);
-  e.className = className;
-  if (className !== 'productContent') e.innerText = innerText;
-  return e;
+// Cria um elemento HTML conforme a especiação dos parametros - Carrinho.
+const createCustomProductElement = (tag, className, innerText) => {
+  const element = document.createElement(tag);
+  element.className = className;
+  if (className !== 'productContent') element.innerText = innerText;
+  return element;
 };
 
+// Cria os componentes HTML referentes um item do carrinho.
 const createCartItemElement = ({ image, sku, name, salePrice }) => {
   const li = document.createElement('li');
   li.className = 'cart__item';
@@ -49,6 +66,7 @@ const createCartItemElement = ({ image, sku, name, salePrice }) => {
   return li;
 };
 
+// Adiciona produto no carrinho.
 const createCartListProducts = async (item) => {
   const products = await fetchItem(item);
   const { id, title, price, thumbnail } = products;
@@ -63,22 +81,23 @@ const createCartListProducts = async (item) => {
   getSum();
 };
 
-const createCustomElement = (element, className, innerText, sku) => {
-  const e = document.createElement(element);
-  e.className = className;
-  e.innerText = innerText;
-  if (element === 'button') {
-    e.addEventListener('click', () => {
+// Cria um elemento HTML conforme a especiação dos parametros - Lista de produtos
+const createCustomElement = (tag, className, innerText, sku) => {
+  const element = document.createElement(tag);
+  element.className = className;
+  element.innerText = innerText;
+  if (tag === 'button') {
+    element.addEventListener('click', () => {
       createCartListProducts(sku);
     });
   }
-  return e;
+  return element;
 };
 
+// Cria os componentes HTML referentes a um produto
 const createProductItemElement = ({ sku, name, image, price }) => {
   const section = document.createElement('section');
   section.className = 'item';
-  
   section.appendChild(createProductImageElement(image));
   section.appendChild(createCustomElement('span', 'item__sku', sku));
   section.appendChild(createCustomElement('span', 'item__title', name));
@@ -88,20 +107,21 @@ const createProductItemElement = ({ sku, name, image, price }) => {
   return section;
 };
 
-const items = document.querySelector('.items');
-
+// Cria o elemento HTML referente a tela de Loading.
 const createLoading = () => {
   const load = createCustomElement('p', 'loading', 'Carregando...');
   items.appendChild(load);
   return load;
 };
 
+// Remove o elemento HTML referente a tela de Loading
 const removeLoanding = (loadingElements) => {
   loadingElements.forEach((loadingElement) => {
     loadingElement.remove();
   });
 };
 
+// Cria uma lista com todos os produtos
 const createListProducts = async () => {
   const loadingElements = [];
   for (let i = 0; i < 8; i) {
@@ -117,40 +137,38 @@ const createListProducts = async () => {
   });
 };
 
+// Carrega os itens do carrinho salvos no 'Local Storage'
 const savedItems = () => {
   list.innerHTML = getSavedCartItems();
   const buttons = document.querySelectorAll('.cart__item button');
   buttons.forEach((button) => button.addEventListener('click', cartItemClickListener));
 };
 
-const cartContainer = document.querySelector('.cart');
-const cartIcon = document.querySelector('.header i');
-
+// Cria a dinamica de esconder ou mostrar o carrinho
 const toggleCartVisibility = () => {
   cartContainer.classList.toggle('noVisible');
   cartContainer.classList.toggle('visible');
-  if (cartContainer.classList.contains('visible')) {
-    cartIcon.textContent = 'highlight_off';
-    cartIcon.classList.add('highlight-off-icon');
-    cartIcon.classList.remove('shopping-cart-icon');
-  } if (cartContainer.classList.contains('noVisible')) {
-    cartIcon.textContent = 'shopping_cart';
-    cartIcon.classList.add('shopping-cart-icon');
-    cartIcon.classList.remove('highlight-off-icon');
-  }
+  const isVisible = cartContainer.classList.contains('visible');
+  cartIcon.textContent = isVisible ? 'highlight_off' : 'shopping_cart';
+  cartIcon.classList.toggle('highlight-off-icon', isVisible);
+  cartIcon.classList.toggle('shopping-cart-icon', !isVisible);
 };
 
+// Adiciona o evento 'toggleCartVisibility' ao icone do carrinho
 const iconEventListener = () => {
   cartIcon.addEventListener('click', toggleCartVisibility);
 };
 
-const clear = document.querySelector('.empty-cart');
-
+// Limpa o carrinho
 const clearCart = () => {
   clear.addEventListener('click', () => {
     localStorage.clear();
-    list.innerText = '';
-    totalPrice.innerText = 'R$ 0,00';
+    if (list) {
+      while (list.firstChild) {
+        list.removeChild(list.firstChild);
+      } 
+    }
+      getSum();
   });
 };
 
