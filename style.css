@@ -354,15 +354,44 @@ body {
 }
 
 .footer {
+  align-items: center;
   background-color: var(--secundary-white);
+  bottom: 0;
   display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
   justify-content: center;
-  padding: 1.5rem;
+  padding: 20px;
 }
 
-.footerTitle {
-  font-size: 1.5rem;
-  letter-spacing: 0.05rem;
+.footerList {
+  align-items: center;
+  display: flex;
+  height: 100px;
+  justify-content: center;
+  width: 100px;
+}
+
+#github_logo {
+  height: 2rem;
+  filter: contrast(0.6);
+}
+
+#linkedin_logo {
+  height: 3rem;
+  filter: contrast(0.6);
+}
+
+.list-item img {
+  margin: 10px;
+  width: 100%;
+}
+
+.list-item a:hover img {
+  fill: cyan;
+  filter: brightness(1.2) drop-shadow(2px 2px 20px var(--white));
+  transform: scale(1.2);
+  transition: ease-in-out 300ms;
 }
 
 @media screen and ( max-width : 1080px ) {
